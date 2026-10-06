@@ -1,42 +1,11 @@
 import ProductCard from "@/components/ProductCard";
-
-const productos = [
-  {
-    id: 1,
-    nombre: "Reloj Clásico",
-    categoria: "Relojes",
-    precio: 129,
-  },
-  {
-    id: 2,
-    nombre: "Reloj Deportivo",
-    categoria: "Relojes",
-    precio: 159,
-  },
-  {
-    id: 3,
-    nombre: "Casaca Urbana",
-    categoria: "Casacas",
-    precio: 119,
-  },
-  {
-    id: 4,
-    nombre: "Polo Básico",
-    categoria: "Polos",
-    precio: 49,
-  },
-  {
-    id: 5,
-    nombre: "Billetera Clásica",
-    categoria: "Billeteras",
-    precio: 59,
-  },
-];
+import FeaturedCarousel from "@/components/FeaturedCarousel";
+import { productos } from "@/data/products";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-100">
-      
+
       {/* Encabezado */}
       <header className="bg-black text-white">
         <div className="mx-auto max-w-6xl px-6 py-6">
@@ -53,16 +22,22 @@ export default function Home() {
       {/* Contenido */}
       <div className="mx-auto max-w-6xl px-6 py-10">
 
-        <h2 className="text-3xl font-bold text-gray-900">
-          Nuestros productos
-        </h2>
+        {/* Carrusel */}
+        <FeaturedCarousel />
 
-        <p className="mt-2 text-gray-600">
-          Encuentra relojes, ropa y accesorios.
-        </p>
+        {/* Título del catálogo */}
+        <div className="mb-6">
+          <h2 className="text-3xl font-bold text-gray-900">
+            Nuestros productos
+          </h2>
+
+          <p className="mt-2 text-gray-600">
+            Encuentra relojes, ropa y accesorios.
+          </p>
+        </div>
 
         {/* Categorías */}
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mb-8 flex flex-wrap gap-3">
           <button className="rounded-full bg-black px-5 py-2 text-sm font-medium text-white">
             Todos
           </button>
@@ -85,7 +60,7 @@ export default function Home() {
         </div>
 
         {/* Productos */}
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {productos.map((producto) => (
             <ProductCard
               key={producto.id}
