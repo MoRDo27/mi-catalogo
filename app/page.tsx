@@ -2,6 +2,7 @@ import ProductCard from "@/components/ProductCard";
 import FeaturedCarousel from "@/components/FeaturedCarousel";
 import { productos } from "@/data/products";
 import Image from "next/image";
+import OfertasSemana from "@/components/OfertasSemana";
 
 export default function Home() {
   return (
@@ -42,6 +43,9 @@ export default function Home() {
 
         {/* Carrusel */}
         <FeaturedCarousel />
+        
+
+        <OfertasSemana />
 
         {/* Título del catálogo */}
         <div className="mb-6">
