@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { productos } from "@/data/products";
 
 export default function FeaturedCarousel() {
@@ -9,12 +9,23 @@ export default function FeaturedCarousel() {
   );
 
   const [actual, setActual] = useState(0);
+  const [pausado, setPausado] = useState(false);
+
+    useEffect(() => {
+    if (destacados.length <= 1 || pausado) return;
+
+  const id = setTimeout(() => {
+    setActual((prev) => (prev + 1) % destacados.length);
+  }, 3000);
+
+  return () => clearTimeout(id);
+  }, [actual, pausado, destacados.length]);
+  
 
   if (destacados.length === 0) {
     return null;
   }
 
-  const producto = destacados[actual];
 
   const siguiente = () => {
     setActual((actual + 1) % destacados.length);
@@ -41,42 +52,50 @@ export default function FeaturedCarousel() {
       </div>
 
       {/* Carrusel */}
-      <div className="relative overflow-hidden rounded-3xl bg-black text-white">
+      <div 
+        onMouseEnter={() => setPausado(true)}
+        onMouseLeave={() => setPausado(false)}
+        className="relative overflow-hidden rounded-3xl bg-black text-white">
         
-        <div className="grid min-h-[350px] md:grid-cols-2">
+        <div
+  className="flex transition-transform duration-500 ease-in-out motion-reduce:transition-none"
+  style={{ transform: `translateX(-${actual * 100}%)` }}
+>
+  {destacados.map((producto) => (
+    <div
+      key={producto.id}
+      className="grid min-h-[350px] w-full shrink-0 md:grid-cols-2"
+    >
+              {/* Imagen temporal */}
+              <div className="flex items-center justify-center bg-gray-900">
+                <span className="text-8xl">⌚</span>
+              </div>
 
-          {/* Imagen temporal */}
-          <div className="flex items-center justify-center bg-gray-900">
-            <span className="text-8xl">
-              ⌚
-            </span>
-          </div>
+              {/* Información */}
+              <div className="flex flex-col justify-center p-8 md:p-12">
+                <span className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-400">
+                  Producto destacado
+                </span>
 
-          {/* Información */}
-          <div className="flex flex-col justify-center p-8 md:p-12">
-            
-            <span className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-400">
-              Producto destacado
-            </span>
+                <h3 className="text-3xl font-bold md:text-4xl">
+                  {producto.nombre}
+                </h3>
 
-            <h3 className="text-3xl font-bold md:text-4xl">
-              {producto.nombre}
-            </h3>
+                <p className="mt-4 text-gray-300">
+                  {producto.descripcion}
+                </p>
 
-            <p className="mt-4 text-gray-300">
-              {producto.descripcion}
-            </p>
+                <p className="mt-6 text-3xl font-bold">
+                  S/ {producto.precio.toFixed(2)}
+                </p>
 
-            <p className="mt-6 text-3xl font-bold">
-              S/ {producto.precio.toFixed(2)}
-            </p>
-
-            <button className="mt-6 w-fit rounded-xl bg-white px-6 py-3 font-semibold text-black transition hover:bg-gray-200">
-              Ver producto
-            </button>
-
-          </div>
-        </div>
+                <button className="mt-6 w-fit rounded-xl bg-white px-6 py-3 font-semibold text-black transition hover:bg-gray-200">
+                  Ver producto
+                </button>
+              </div>
+            </div>
+          ))}
+    </div>
 
         {/* Botón anterior */}
         <button

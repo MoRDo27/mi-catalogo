@@ -1,6 +1,7 @@
 import ProductCard from "@/components/ProductCard";
 import FeaturedCarousel from "@/components/FeaturedCarousel";
 import { productos } from "@/data/products";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -8,17 +9,34 @@ export default function Home() {
 
       {/* Encabezado */}
       <header className="bg-black text-white">
-        <div className="mx-auto max-w-6xl px-6 py-6">
-          <h1 className="text-2xl font-bold">
-            MI TIENDA
-          </h1>
-
-          <p className="mt-1 text-gray-300">
-            Relojes & accesorios
-          </p>
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <Image
+          src="/logo-mb-time-claro.svg"
+          alt="M&B Time"
+          width={120}
+          height={62}
+          priority
+        />
+        <p className="text-gray-300">Relojes & accesorios</p>
         </div>
       </header>
-
+      <section className="bg-black text-white">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-6 pb-12 md:grid-cols-2">
+          <div>
+            <h2 className="text-4xl font-bold">Relojes con carácter</h2>
+            <p className="mt-3 text-gray-300">
+              Acero inoxidable, movimiento japonés y diseño atemporal.
+            </p>
+          </div>
+          <Image
+          src="/LOGO.jpeg"
+          alt="Reverso de un reloj M&B Time"
+          width={600}
+          height={600}
+          className="rounded-2xl"
+          />
+        </div>
+      </section>
       {/* Contenido */}
       <div className="mx-auto max-w-6xl px-6 py-10">
 
