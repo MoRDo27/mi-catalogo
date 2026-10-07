@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { productos } from "@/data/products";
 
@@ -67,10 +67,15 @@ export default function FeaturedCarousel() {
       className="grid min-h-[350px] w-full shrink-0 md:grid-cols-2"
     >
               {/* Imagen temporal */}
-              <div className="flex items-center justify-center bg-gray-900">
-                <span className="text-8xl">⌚</span>
+              <div className="relative min-h-[250px] bg-gray-900 md:min-h-full">
+                <Image
+                  src={producto.imagen}
+                  alt={producto.nombre}
+                  fill
+                  className="object-contain p-6"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
-
               {/* Información */}
               <div className="flex flex-col justify-center p-8 md:p-12">
                 <span className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-400">
